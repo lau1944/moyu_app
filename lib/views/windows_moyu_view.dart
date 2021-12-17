@@ -7,6 +7,7 @@ import 'package:moyu_app/blocs/moyu_event.dart';
 import 'package:moyu_app/blocs/moyu_state.dart';
 import 'package:moyu_app/models/system.dart';
 import 'package:moyu_app/services/local.dart';
+import 'package:moyu_app/views/widgets/replay_view.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class WindowsMoyuView extends StatefulWidget {
@@ -17,7 +18,7 @@ class WindowsMoyuView extends StatefulWidget {
 }
 
 class _WindowsMoyuViewState extends State<WindowsMoyuView> {
-  late final _moyuBloc;
+  late final MoYuBloc _moyuBloc;
   final bool _isFullscreen = true;
 
   @override
@@ -38,32 +39,9 @@ class _WindowsMoyuViewState extends State<WindowsMoyuView> {
             if (state is MoyuIng) {
               final progress = state.progress;
 
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Lottie.asset('assets/lotties/windows_progress.json',
-                      width: 155, height: 155),
-                  const SizedBox(
-                    height: 35,
-                  ),
-                  const Text(
-                    '正在配置 Windows 更新',
-                    style: TextStyle(color: Colors.white, fontSize: 24),
-                  ),
-                  Text(
-                    '已完成 ' +
-                        ((progress > 0 ? progress.toInt() : 0) * 100)
-                            .toString() +
-                        ' % ',
-                    style: const TextStyle(color: Colors.white, fontSize: 24),
-                  ),
-                  const Text(
-                    '请勿关闭计算机',
-                    style: TextStyle(color: Colors.white, fontSize: 24),
-                  ),
-                ],
-              );
+              return _moyuIngView(progress);
+            } else if (state is MoyuFinish) {
+              return _replayView();
             }
             return const SizedBox();
           },
@@ -71,6 +49,40 @@ class _WindowsMoyuViewState extends State<WindowsMoyuView> {
           listenWhen: (pre, cur) => pre != cur,
         ),
       ),
+    );
+  }
+
+  Widget _replayView() {
+    return ReplayView(onReplay: () {
+      _moyuBloc.add(MoyuStarted(time: settings.timer!, os: System.windows));
+    });
+  }
+
+  Widget _moyuIngView(double progress) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Lottie.asset('assets/lotties/windows_progress.json',
+            width: 155, height: 155),
+        const SizedBox(
+          height: 35,
+        ),
+        const Text(
+          '正在配置 Windows 更新',
+          style: TextStyle(color: Colors.white, fontSize: 24),
+        ),
+        Text(
+          '已完成 ' +
+              (progress > 0.01 ? (progress * 100).toInt() : 0).toString() +
+              ' % ',
+          style: const TextStyle(color: Colors.white, fontSize: 24),
+        ),
+        const Text(
+          '请勿关闭计算机',
+          style: TextStyle(color: Colors.white, fontSize: 24),
+        ),
+      ],
     );
   }
 }

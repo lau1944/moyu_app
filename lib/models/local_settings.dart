@@ -6,7 +6,7 @@ class LocalSettings {
   String? exitKey;
 
   LocalSettings({this.timer, this.exitKey}) {
-    timer ??= 15 * 60;
+    timer ??= 15 ;
     exitKey ??= 'esc';
   }
 }

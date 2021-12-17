@@ -6,6 +6,7 @@ import 'package:moyu_app/blocs/moyu_event.dart';
 import 'package:moyu_app/blocs/moyu_state.dart';
 import 'package:moyu_app/models/system.dart';
 import 'package:moyu_app/services/local.dart';
+import 'package:moyu_app/views/widgets/replay_view.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class MacMoyuView extends StatefulWidget {
@@ -33,7 +34,7 @@ class _MacMoyuViewState extends State<MacMoyuView> {
       backgroundColor: Colors.black,
       body: Center(
         child: Container(
-          width: 100,
+          width: 200,
           alignment: Alignment.center,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,20 +45,24 @@ class _MacMoyuViewState extends State<MacMoyuView> {
                 child: Image.asset(
                   'assets/images/ic_apple.png',
                   color: Colors.white,
-                  width: 50,
-                  height: 50,
+                  width: 70,
+                  height: 70,
                 ),
               ),
               BlocConsumer<MoYuBloc, MoyuState>(
                 builder: (context, state) {
                   if (state is MoyuIng) {
                     final progress = state.progress;
-                    
+
                     return LinearPercentIndicator(
                       percent: progress,
                       backgroundColor: Colors.grey.withOpacity(0.5),
                       progressColor: Colors.white,
                     );
+                  } else if (state is MoyuFinish) {
+                    return ReplayView(onReplay: () {
+                      _replay();
+                    });
                   }
                   return const SizedBox();
                 },
@@ -69,5 +74,9 @@ class _MacMoyuViewState extends State<MacMoyuView> {
         ),
       ),
     );
+  }
+
+  void _replay() {
+    _moyuBloc.add(MoyuStarted(time: settings.timer!, os: System.macos));
   }
 }
