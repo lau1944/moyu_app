@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
+import 'package:moyu_app/core/route_util.dart';
+import 'package:moyu_app/views/section_view.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({Key? key}) : super(key: key);
@@ -15,13 +17,15 @@ class SplashView extends StatelessWidget {
             alignment: Alignment.center,
             child: _welcomeText,
           ),
-          _startButton
+          _startButton(() {
+            Navigator.push(context, routeConstrutor(const SectionView()));
+          })
         ],
       ),
     );
   }
 
-  Widget get _startButton => Container(
+  Widget _startButton(Function() onTaped) => Container(
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.all(15),
         child: AnimatedButton(
@@ -31,7 +35,7 @@ class SplashView extends StatelessWidget {
             borderRadius: 15,
             textStyle: const TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-            onPress: () {}),
+            onPress: onTaped),
       );
 
   Widget get _welcomeText => Container(

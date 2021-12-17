@@ -4,6 +4,7 @@ import 'package:moyu_app/models/device_info.dart';
 import 'package:moyu_app/models/system.dart';
 
 final DeviceInfo _deviceInfo = DeviceInfo();
+DeviceInfo get deviceInfo => _deviceInfo;
 
 Future<void> initPlatformState() async {
   if (Platform.isWindows) {
