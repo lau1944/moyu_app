@@ -1,16 +1,33 @@
-# moyu_app
+# 摸鱼 🐟 APP
 
-A new Flutter project.
+摸鱼专用应用 支持 MacOS Windows (Ubuntu计划中-～-) 
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+本项目纯属娱乐. 使用flutter开发, 兼容多系统.
 
-A few resources to get you started if this is your first Flutter project:
+## 项目构建
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+代码从仓库下载到本地后 
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+执行 Mac 应用 (release模式)
+
+```dart
+flutter run -d macos --release
+```
+
+执行 Windows 应用
+```dart
+flutter run -d windows --release
+```
+
+## 范例展示
+
+<p align="start">
+  <p><b>OS选择</b></p>
+  <img src="/present_sr/os_section.png" width="55%" height="55%" />
+  <p><b>Mac更新</b></p>
+  <img src="/present_sr/mac_update.png" width="55%" height="55%" />
+&nbsp; &nbsp; &nbsp; &nbsp;
+<p><b>Windows更新</b></p>
+  <img src="/present_sr/windows_update.png" width="55%" height="55%" />
+</p>
