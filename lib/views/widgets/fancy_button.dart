@@ -27,7 +27,7 @@ class FancyButton extends StatelessWidget {
         backgroundColor: Colors.blue,
         borderRadius: 15,
         textStyle: const TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+            color: Colors.black54, fontWeight: FontWeight.bold, fontSize: 20),
         onPress: onTaped ?? () {});
   }
 }

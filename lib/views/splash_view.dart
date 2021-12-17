@@ -9,7 +9,7 @@ class SplashView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black54,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -26,7 +26,7 @@ class SplashView extends StatelessWidget {
   }
 
   Widget _startButton(Function() onTaped) => Container(
-        alignment: Alignment.centerRight,
+        alignment: Alignment.centerLeft,
         padding: const EdgeInsets.all(15),
         child: AnimatedButton(
             width: 155,
@@ -34,7 +34,7 @@ class SplashView extends StatelessWidget {
             backgroundColor: Colors.blue,
             borderRadius: 15,
             textStyle: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                color: Colors.black54, fontWeight: FontWeight.bold, fontSize: 20),
             onPress: onTaped),
       );
 
@@ -47,7 +47,7 @@ class SplashView extends StatelessWidget {
           children: [
             const Text(
               '欢迎来到',
-              style: TextStyle(color: Colors.black, fontSize: 26),
+              style: TextStyle(color: Colors.white, fontSize: 26),
             ),
             Row(
               children: [

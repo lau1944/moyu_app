@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:moyu_app/core/device_info.dart';
+import 'package:moyu_app/core/route_util.dart';
 import 'package:moyu_app/models/system.dart';
+import 'package:moyu_app/views/mac_moyu_view.dart';
 import 'package:moyu_app/views/widgets/fancy_button.dart';
 
 class SectionView extends StatefulWidget {
@@ -21,7 +23,7 @@ class _SectionViewState extends State<SectionView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black12,
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 45, horizontal: 15),
         child: ValueListenableBuilder(
@@ -47,7 +49,18 @@ class _SectionViewState extends State<SectionView> {
             system == System.linux,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 25),
-          child: const FancyButton(text: "进入摸鱼状态"),
+          child: FancyButton(
+            text: "进入摸鱼状态",
+            onTaped: () {
+              if (_preferSystem.value == System.macos) {
+                Navigator.of(context).push(
+                  routeConstrutor(
+                    const MacMoyuView(),
+                  ),
+                );
+              }
+            },
+          ),
         ),
       ),
     );
@@ -71,12 +84,12 @@ class _SectionViewState extends State<SectionView> {
               }
             }),
             // Linux
-            _checkItem(os == System.linux, translateSystem(System.linux),
-                (checked) {
-              if (checked != null && checked) {
-                _preferSystem.value = System.linux;
-              }
-            })
+            //_checkItem(os == System.linux, translateSystem(System.linux),
+            //    (checked) {
+            //  if (checked != null && checked) {
+            //    _preferSystem.value = System.linux;
+            //  }
+            //})
           ],
         ),
       );
@@ -84,8 +97,8 @@ class _SectionViewState extends State<SectionView> {
   Widget _checkItem(bool isChecked, String name, Function(bool?) onChanged) {
     return GestureDetector(
       onTap: () {
-          onChanged(!isChecked);
-        },
+        onChanged(!isChecked);
+      },
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
@@ -95,12 +108,15 @@ class _SectionViewState extends State<SectionView> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Checkbox(value: isChecked, onChanged: onChanged),
+            Checkbox(
+              value: isChecked,
+              onChanged: onChanged,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Text(
                 name,
-                style: const TextStyle(color: Colors.black, fontSize: 24),
+                style: const TextStyle(color: Colors.white, fontSize: 24),
               ),
             )
           ],
@@ -114,7 +130,7 @@ class _SectionViewState extends State<SectionView> {
           padding: EdgeInsets.symmetric(vertical: 25),
           child: Text(
             "请选择您的系统",
-            style: TextStyle(color: Colors.grey, fontSize: 24),
+            style: TextStyle(color: Colors.white60, fontSize: 24),
           ),
         ),
       );
