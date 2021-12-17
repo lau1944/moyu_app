@@ -10,6 +10,7 @@ class MoYuBloc extends Bloc<MoyuEvent, MoyuState> {
   MoYuBloc() : super(MoyuInit()) {
     on(_handleMoyuStart);
     on(_handleUpdateProgress);
+    on(_handleMoyuEnd);
   }
 
   // handle clock update
@@ -35,8 +36,17 @@ class MoYuBloc extends Bloc<MoyuEvent, MoyuState> {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       add(MoyuProgressUpdated(totalTime, ++progressTime));
 
-      if (progressTime >= totalTime) timer.cancel();
+      if (progressTime >= totalTime) {
+        timer.cancel();
+        add(MoyuEnded());
+      }
     });
     emit(MoyuIng(progress: 0, progressTime: 0));
+  }
+
+  // handle clock end
+  FutureOr<void> _handleMoyuEnd(
+      MoyuEnded event, Emitter<MoyuState> emit) async {
+    emit(MoyuFinish());
   }
 }

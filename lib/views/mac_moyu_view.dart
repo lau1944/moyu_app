@@ -52,7 +52,7 @@ class _MacMoyuViewState extends State<MacMoyuView> {
                 builder: (context, state) {
                   if (state is MoyuIng) {
                     final progress = state.progress;
-                    print(progress);
+                    
                     return LinearPercentIndicator(
                       percent: progress,
                       backgroundColor: Colors.grey.withOpacity(0.5),

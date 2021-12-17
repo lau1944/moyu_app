@@ -4,6 +4,7 @@ import 'package:moyu_app/core/route_util.dart';
 import 'package:moyu_app/models/system.dart';
 import 'package:moyu_app/views/mac_moyu_view.dart';
 import 'package:moyu_app/views/widgets/fancy_button.dart';
+import 'package:moyu_app/views/windows_moyu_view.dart';
 
 class SectionView extends StatefulWidget {
   const SectionView({Key? key}) : super(key: key);
@@ -16,8 +17,8 @@ class _SectionViewState extends State<SectionView> {
   final _preferSystem = ValueNotifier(deviceInfo.os);
 
   @override
-  void initState() {
-    super.initState();
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -56,6 +57,14 @@ class _SectionViewState extends State<SectionView> {
                 Navigator.of(context).push(
                   routeConstrutor(
                     const MacMoyuView(),
+                  ),
+                );
+              }
+
+              else if (_preferSystem.value == System.windows) {
+                Navigator.of(context).push(
+                  routeConstrutor(
+                    const WindowsMoyuView(),
                   ),
                 );
               }
