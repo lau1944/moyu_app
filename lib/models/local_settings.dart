@@ -3,10 +3,10 @@
 // [exitKey] 退出摸鱼模式按键
 class LocalSettings {
   int? timer;
-  String? exitKey;
+  String? errorKey;
 
-  LocalSettings({this.timer, this.exitKey}) {
-    timer ??= 15 * 60;
-    exitKey ??= 'esc';
+  LocalSettings({this.timer, this.errorKey}) {
+    timer ??= 35 * 60;
+    errorKey ??= 'esc';
   }
 }

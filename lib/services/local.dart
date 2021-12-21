@@ -9,7 +9,7 @@ Future<void> initSettings() async {
   final preferences = await _initLocalCache();
   _settings = LocalSettings(
       timer: preferences.getInt('timer'),
-      exitKey: preferences.getString("exit_key"));
+      errorKey: preferences.getString("exit_key"));
 }
 
 Future<SharedPreferences> _initLocalCache() async {
